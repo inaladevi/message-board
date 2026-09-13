@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Breakroom</title>
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="board-header">
+    <h1>What's the word?</h1>
+    <a href="/new" class="action-btn">Drop a note</a>
+  </header>
+
+  <main class="feed-container">
+    <% messages.forEach((message) => { %>
+      <article class="feed-item">
+        <div class="meta-row">
+          <span class="author">@<%= message.user %></span>
+          <span class="timestamp">at <%= message.added.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) %></span>
+        </div>
+        <p class="content"><%= message.text %></p>
+        <div class="tag-wrapper">
+        <a href="/message/<%= messages.indexOf(message) %>" class="detail-trigger">Read closer 👀</a>
+        </div>
+      </article>
+    <% }); %>
+  </main>
+</body>
+</html>

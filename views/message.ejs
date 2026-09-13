@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Looking Closer</title>
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="inspection-wrapper">
+    <section class="inspection-view">
+      <header class="meta-row">
+        <span class="author label-accent">@<%= message.user %> shouted:</span>
+      </header>
+      <blockquote class="focus-content">“<%= message.text %>”</blockquote>
+      <footer class="timestamp-stamp">Left here on: <%= message.added.toLocaleDateString() %></footer>
+      <a href="/" class="abort-link">← Head back home</a>
+    </section>
+  </main>
+</body>
+</html>
