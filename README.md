@@ -4,7 +4,7 @@ A message board built with Node.js, Express, and EJS.
 
 ## Live Demo
 
-🔗 [Click here to view the live app on Render](https://message-board-8vvr.onrender.com)
+🔗 [Click here to view the live app](https://message-board-8vvr.onrender.com)
 
 ## Features
 
