@@ -121,7 +121,10 @@ app.get("/search", (req, res) => {
            message.email.toLowerCase().includes(keyword);
   });
 
-  res.render("search", { searchResults, queryText: req.query.searchQuery || "" });
+  res.render("search", { 
+  searchResults, 
+  queryText: req.query.searchQuery || "",
+  messages //
 });
 
 
