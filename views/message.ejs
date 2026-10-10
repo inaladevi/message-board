@@ -13,18 +13,17 @@
   <main class="inspection-wrapper">
     <section class="inspection-view">
       <header class="meta-row">
-        <span class="author label-accent">
-          @<%= message.user %>
-            <% if (message.age) { %>
-              <span class="user-age" style="color: #ffd3e8; font-size: 1.2rem;">(<%= message.age %>)</span>
-              <% } %>
-                shouted:
-        </span>
+        <span class="author label-accent">@<%= message.user %> shouted:</span>
       </header>
-  
-      <p class="user-email" style="margin-bottom: -0.5rem;">
-        <%= message.email %>
-      </p>
+    
+      <% if (message.age) { %>
+        <p class="user-age-detail">Age: <%= message.age %> years old</p>
+        <% } %>
+    
+          <p class="user-email-detail">
+            <%= message.email %>
+          </p>
+
   
       <blockquote class="focus-content">“<%= message.text %>”</blockquote>
   

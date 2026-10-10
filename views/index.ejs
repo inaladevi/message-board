@@ -30,12 +30,12 @@
           <span class="author">
             @<%= message.user %>
               <% if (message.age) { %>
-                <span class="user-age">(<%= message.age %>)</span>
+                <span class="user-age">• <%= message.age %> yrs</span>
                 <% } %>
           </span>
-          <span class="timestamp">at <%= message.added.toLocaleTimeString([], {hour: '2-digit' , minute:'2-digit'}) %>
-              </span>
+          <span class="timestamp">at <%= message.added.toLocaleTimeString([], {hour: '2-digit' , minute:'2-digit'}) %></span>
         </div>
+
   
         <p class="user-email">
           <%= message.email %>
