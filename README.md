@@ -13,6 +13,8 @@ A message board built with Node.js, Express, and EJS.
 - View individual message details
 - Server-side rendering with EJS
 - Responsive styling with a midnight pastel arcade theme
+- View expanded user profile data (email, age, and bio)
+- Search through entries by username handle or email address
 
 ## Built With
 

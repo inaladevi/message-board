@@ -10,24 +10,48 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <header class="board-header">
-    <h1>What's the word?</h1>
-    <a href="/new" class="action-btn">Drop a note</a>
+  <header class="board-header search-header-wrap">
+    <div class="header-main-row">
+      <h1>What's the word?</h1>
+      <a href="/new" class="action-btn">Drop a note</a>
+    </div>
+  
+    <form method="GET" action="/search" class="search-form-inline">
+      <input type="text" name="searchQuery" class="search-input-field" placeholder="Search by user or email..." required
+        autocomplete="off">
+      <button type="submit" class="action-btn search-submit-btn">Find 🔍</button>
+    </form>
   </header>
 
   <main class="feed-container">
-    <% messages.forEach((message) => { %>
+    <% messages.forEach((message)=> { %>
       <article class="feed-item">
         <div class="meta-row">
-          <span class="author">@<%= message.user %></span>
-          <span class="timestamp">at <%= message.added.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) %></span>
+          <span class="author">
+            @<%= message.user %>
+              <% if (message.age) { %>
+                <span class="user-age">(<%= message.age %>)</span>
+                <% } %>
+          </span>
+          <span class="timestamp">at <%= message.added.toLocaleTimeString([], {hour: '2-digit' , minute:'2-digit'}) %>
+              </span>
         </div>
-        <p class="content"><%= message.text %></p>
-        <div class="tag-wrapper">
-        <a href="/message/<%= messages.indexOf(message) %>" class="detail-trigger">Read closer 👀</a>
-        </div>
+  
+        <p class="user-email">
+          <%= message.email %>
+        </p>
+        <p class="content">“<%= message.text %>”</p>
+  
+        <% if (message.bio) { %>
+          <p class="user-bio">bio: <%= message.bio %>
+          </p>
+          <% } %>
+  
+            <div class="tag-wrapper">
+              <a href="/message/<%= messages.indexOf(message) %>" class="detail-trigger">Read closer 👀</a>
+            </div>
       </article>
-    <% }); %>
+      <% }); %>
   </main>
 </body>
 </html>

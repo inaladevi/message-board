@@ -270,3 +270,89 @@ input[type="text"]::placeholder {
     font-size: 1.1rem;
     color: #8c90be;
 }
+
+.user-age {
+    font-size: 1rem;
+    color: #8c90be;
+    margin-left: 0.4rem;
+    font-weight: 500;
+}
+
+.user-email {
+    color: #ffb3d1;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.user-bio {
+    font-size: 1.15rem;
+    color: #8c90be;
+    font-style: italic;
+    margin-top: 0.35rem;
+    line-height: 1.4;
+    border-left: 2px dashed rgba(214, 187, 255, 0.2);
+    padding-left: 0.75rem;
+}
+
+.search-header-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.header-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.search-form-inline {
+    width: 100%;
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.search-input-field {
+    flex-grow: 1;
+    background: #1c1d3a;
+    border: 2px solid rgba(214, 187, 255, 0.1);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 16px;
+    padding: 0.75rem 1.2rem;
+    outline: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.search-input-field:focus {
+    border-color: #ffd3e8;
+    background: #25284e;
+    box-shadow: 0 0 0 4px rgba(255, 211, 232, 0.15);
+}
+
+.search-submit-btn {
+    font-size: 1.05rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: 16px;
+    background: #ffd3e8; 
+    box-shadow: 0 4px 12px rgba(255, 211, 232, 0.2);
+}
+
+.search-submit-btn:hover {
+    background: #ffc2df;
+    box-shadow: 0 8px 18px rgba(255, 211, 232, 0.35);
+}
+
+.search-empty-text {
+    color: #8c90be;
+    font-style: italic;
+    font-size: 1.25rem;
+    text-align: center;
+    width: 100%;
+}

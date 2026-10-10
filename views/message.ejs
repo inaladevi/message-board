@@ -13,11 +13,30 @@
   <main class="inspection-wrapper">
     <section class="inspection-view">
       <header class="meta-row">
-        <span class="author label-accent">@<%= message.user %> shouted:</span>
+        <span class="author label-accent">
+          @<%= message.user %>
+            <% if (message.age) { %>
+              <span class="user-age" style="color: #ffd3e8; font-size: 1.2rem;">(<%= message.age %>)</span>
+              <% } %>
+                shouted:
+        </span>
       </header>
+  
+      <p class="user-email" style="margin-bottom: -0.5rem;">
+        <%= message.email %>
+      </p>
+  
       <blockquote class="focus-content">“<%= message.text %>”</blockquote>
-      <footer class="timestamp-stamp">Left here on: <%= message.added.toLocaleDateString() %></footer>
-      <a href="/" class="abort-link">← Head back home</a>
+  
+      <% if (message.bio) { %>
+        <p class="user-bio" style="font-size: 1.3rem; margin-bottom: 1rem;">
+          <%= message.bio %>
+        </p>
+        <% } %>
+  
+          <footer class="timestamp-stamp">Left here on: <%= message.added.toLocaleDateString() %>
+          </footer>
+          <a href="/" class="abort-link">← Head back home</a>
     </section>
   </main>
 </body>
