@@ -121,13 +121,8 @@ app.get("/search", (req, res) => {
            message.email.toLowerCase().includes(keyword);
   });
 
-  res.render("search", { 
-  searchResults, 
-  queryText: req.query.searchQuery || "",
-  messages //
+  res.render("search", { searchResults, queryText: req.query.searchQuery || "", messages });
 });
-
-
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");
