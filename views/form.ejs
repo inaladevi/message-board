@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <!-- 🌟 FIXED: Google Fonts network pathways patched successfully -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <title>Drop a Note</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
@@ -13,30 +14,41 @@
   <main class="form-wrapper">
     <h1>Say something...</h1>
 
+    <% if (errors) { %>
+      <div class="validation-error-panel">
+        <ul>
+          <% errors.forEach(err => { %>
+            <li><%= err.msg %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
     <form method="POST" action="/new" class="composer-form">
+
       <div class="input-block">
         <label for="messageUser">Who are you?</label>
-        <input type="text" id="messageUser" name="messageUser" required autocomplete="off" placeholder="Your nickname here...">
+        <input type="text" id="messageUser" name="messageUser" value="<%= prevInput.messageUser || '' %>" required autocomplete="off" placeholder="Your nickname here...">
       </div>
 
       <div class="input-block">
         <label for="messageEmail">Email address</label>
-        <input type="text" id="messageEmail" name="messageEmail" required autocomplete="off" placeholder="your@email.com...">
+        <input type="text" id="messageEmail" name="messageEmail" value="<%= prevInput.messageEmail || '' %>" required autocomplete="off" placeholder="your@email.com...">
       </div>
 
       <div class="input-block">
         <label for="messageAge">How old are you?</label>
-        <input type="text" id="messageAge" name="messageAge" autocomplete="off" placeholder="18 - 120 (optional)...">
+        <input type="text" id="messageAge" name="messageAge" value="<%= prevInput.messageAge || '' %>" autocomplete="off" placeholder="18 - 120 (optional)...">
       </div>
 
       <div class="input-block">
         <label for="messageBio">Tell us about yourself</label>
-        <input type="text" id="messageBio" name="messageBio" autocomplete="off" placeholder="a short bio (max 200 chars)...">
+        <input type="text" id="messageBio" name="messageBio" value="<%= prevInput.messageBio || '' %>" autocomplete="off" placeholder="a short bio (max 200 chars)...">
       </div>
 
       <div class="input-block">
         <label for="messageText">What's on your mind?</label>
-        <input type="text" id="messageText" name="messageText" required autocomplete="off" placeholder="Spill it out...">
+        <input type="text" id="messageText" name="messageText" value="<%= prevInput.messageText || '' %>" required autocomplete="off" placeholder="Spill it out...">
       </div>
 
       <div class="form-actions">

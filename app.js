@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("node:path");
 const { body, validationResult } = require("express-validator"); 
+const db = require("./db/queries");
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -67,14 +68,22 @@ const messageValidationRules = [
   body("messageBio").optional().isLength({ max: 200 }).withMessage("bio cannot exceed 200 characters")
 ];
 
+app.get("/", async (req, res) => {
+  try {
 
+    const usernames = await db.getAllUsernames();
+    
+    console.log("Usernames from DB:", usernames);
+  } catch (err) {
+    console.error("Error fetching usernames from database:", err);
+  }
 
-app.get("/", (req, res) => {
   res.render("index", { messages });
 });
 
+
 app.get("/new", (req, res) => {
-  res.render("form");
+  res.render("form", { errors: null, prevInput: {} });
 });
 
 app.get("/message/:id", (req, res) => {
@@ -87,12 +96,25 @@ app.get("/message/:id", (req, res) => {
   res.render("message", { message });
 });
 
-app.post("/new", messageValidationRules, (req, res) => {
+app.post("/new", messageValidationRules, async (req, res) => {
   
   const errors = validationResult(req);
   
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    
+    return res.render("form", { 
+      errors: errors.array(), 
+      prevInput: req.body 
+    });
+  }
+
+  console.log("username to be saved: ", req.body.messageUser);
+
+  try {
+
+    await db.insertUsername(req.body.messageUser);
+  } catch (err) {
+    console.error("Error inserting username into database:", err);
   }
 
   const messageText = req.body.messageText;

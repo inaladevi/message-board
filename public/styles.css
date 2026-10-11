@@ -341,3 +341,32 @@ input[type="text"]::placeholder {
   text-align: center;
   width: 100%;
 }
+
+.validation-error-panel {
+    background: rgba(239, 68, 68, 0.12);
+    border: 2px dashed #f87171;
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    color: #f87171;
+    animation: bouncyPop 0.4s ease both;
+}
+
+.validation-error-panel ul {
+    list-style-position: inside;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.user-bio-detail {
+    font-size: 1.3rem; 
+    margin-bottom: 1rem;
+    color: #8c90be;
+    font-style: italic;
+    line-height: 1.4;
+    border-left: 2px dashed rgba(214, 187, 255, 0.2);
+    padding-left: 0.6rem;
+}
