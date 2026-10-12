@@ -67,12 +67,14 @@ app.post("/new", messageValidationRules, async (req, res) => {
 app.get("/delete", async (req, res) => {
   try {
     await db.deleteAllMessages();
+    
     res.redirect("/");
   } catch (err) {
-    console.error("Failed to execute database truncation:", err);
+    console.error("Failed to execute database reset sequence:", err);
     res.status(500).send("Database wipe command interrupted.");
   }
 });
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
