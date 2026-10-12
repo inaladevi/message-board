@@ -4,52 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Breakroom</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <header class="board-header search-header-wrap">
-    <div class="header-main-row">
-      <h1>What's the word?</h1>
-      <a href="/new" class="action-btn">Drop a note</a>
+  <header class="board-header">
+    <div class="header-top-row">
+      <div class="shared-title-wrap">
+        <span class="giant-w">W</span>
+        <div class="title-rows">
+          <span class="title-row-top">hat's <span class="title-accent">the</span></span>
+          <span class="title-row-bottom">ord?</span>
+        </div>
+      </div>
+
+      <div class="action-cluster">
+        <a href="/delete" class="wipe-board-btn">Wipe Board 🗑️</a>
+        <a href="/new" class="action-btn">Drop a note</a>
+      </div>
     </div>
   
-    <form method="GET" action="/search" class="search-form-inline">
-      <input type="text" name="searchQuery" class="search-input-field" placeholder="Search by user or email..." required autocomplete="off">
+    <form method="GET" action="/" class="search-form-inline">
+      <input type="text" name="searchQuery" class="search-input-field" placeholder="Search by user or email..." value="<%= queryText || '' %>" autocomplete="off">
       <button type="submit" class="action-btn search-submit-btn">Find 🔍</button>
+      <% if (queryText) { %>
+        <a href="/" class="search-reset-btn">Reset</a>
+      <% } %>
     </form>
   </header>
 
   <main class="feed-container">
-    <% messages.forEach((message) => { %>
+    <% if (messages.length === 0) { %>
       <article class="feed-item">
-        <div class="meta-row">
-          <span class="author">
-            @<%= message.user %>
-            <% if (message.age) { %>
-              <span class="user-age">• <%= message.age %> yrs</span>
-            <% } %>
-          </span>
-          <span class="timestamp">at <%= message.added.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) %></span>
-        </div>
-
-        <p class="user-email">
-          <%= message.email %>
-        </p>
-        <p class="content">“<%= message.text %>”</p>
-  
-        <% if (message.bio) { %>
-          <p class="user-bio">bio: <%= message.bio %></p>
-        <% } %>
-  
-        <div class="tag-wrapper">
-          <a href="/message/<%= messages.indexOf(message) %>" class="detail-trigger">Read closer 👀</a>
-        </div>
+        <p class="search-empty-text">No notes found resting in storage.</p>
       </article>
-    <% }); %>
+    <% } else { %>
+      <% messages.forEach((message) => { %>
+        <article class="feed-item">
+          <div class="meta-row">
+            <span class="author">
+              @<%= message.username %>
+              <% if (message.age) { %>
+                <span class="user-age">• <%= message.age %> yrs</span>
+              <% } %>
+            </span>
+            <span class="timestamp">at <%= new Date(message.added).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) %></span>
+          </div>
+
+          <p class="user-email">
+            <%= message.email %>
+          </p>
+          <p class="content">“<%= message.text %>”</p>
+  
+          <% if (message.bio) { %>
+            <p class="user-bio">bio: <%= message.bio %></p>
+          <% } %>
+        </article>
+      <% }); %>
+    <% } %>
   </main>
 </body>
 </html>
