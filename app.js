@@ -1,6 +1,7 @@
 require("dotenv").config(); 
 const express = require("express");
 const path = require("node:path");
+const crypto = require("node:crypto");
 const { body, validationResult } = require("express-validator"); 
 const db = require("./db/queries"); 
 
@@ -64,17 +65,33 @@ app.post("/new", messageValidationRules, async (req, res) => {
   }
 });
 
-app.get("/delete", async (req, res) => {
+app.get("/delete", (req, res) => {
+  res.render("confirm-delete", { error: null });
+});
+
+app.post("/delete", async (req, res) => {
+  const adminKey = process.env.ADMIN_KEY;
+  if (!adminKey) {
+    return res.status(403).send("Clearing the board is disabled on this server.");
+  }
+
+  const provided = Buffer.from(String(req.body.adminKey || ""));
+  const expected = Buffer.from(adminKey);
+  const valid =
+    provided.length === expected.length && crypto.timingSafeEqual(provided, expected);
+
+  if (!valid) {
+    return res.status(401).render("confirm-delete", { error: "Wrong admin key." });
+  }
+
   try {
     await db.deleteAllMessages();
-    
     res.redirect("/");
   } catch (err) {
     console.error("Failed to execute database reset sequence:", err);
     res.status(500).send("Database wipe command interrupted.");
   }
 });
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

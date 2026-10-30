@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clear the board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="feed-container">
+    <article class="feed-item">
+      <p class="content">This permanently deletes every message. Enter the admin key to continue.</p>
+      <% if (error) { %>
+        <p class="search-empty-text"><%= error %></p>
+      <% } %>
+      <form method="POST" action="/delete" class="search-form-inline">
+        <input type="password" name="adminKey" class="search-input-field" placeholder="Admin key" autocomplete="off" required>
+        <button type="submit" class="wipe-board-btn">Delete everything</button>
+        <a href="/" class="search-reset-btn">Cancel</a>
+      </form>
+    </article>
+  </main>
+</body>
+</html>
